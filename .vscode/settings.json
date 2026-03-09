@@ -29,7 +29,9 @@
         "AchievementFrameCategories",
         "AchievementFrameAchievements",
         "AchievementFrame_SelectAchievement",
-        "AchievementFrame_UpdateAndSelectCategory"
+        "AchievementFrame_UpdateAndSelectCategory",
+        "AchievementFrameCategories_SelectElementData",
+        "AchievementFrameAchievements_GetSelectedElementData"
     ],
     "Lua.runtime.version": "Lua 5.1",
     "Lua.runtime.builtin": {

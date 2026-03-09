@@ -26,7 +26,7 @@ This addon deliberately avoids saved variables. State is kept in memory for the 
 - Hooks installed:
   - `AchievementFrame:HookScript("OnShow", ...)` restores cached state when the frame shows.
   - `AchievementFrame:HookScript("OnHide", ...)` captures the current selection before hiding.
-  - `hooksecurefunc("AchievementFrameCategories_SelectElementData", ...)` and `hooksecurefunc("AchievementFrameAchievements_SelectElementData", ...)` maintain lightweight caches of the selected IDs.
+  - `hooksecurefunc("AchievementFrameCategories_SelectElementData", ...)` maintain lightweight caches of the selected IDs.
 - The loader waits for `Blizzard_AchievementUI` to load and also calls `InstallHooks` immediately if the UI is already active via `C_AddOns.IsAddOnLoaded`.
 
 ## Compatibility
