@@ -1,7 +1,7 @@
+## Interface: 120005
 ## Title: Achievement Session State
 ## Author: TheQuibbler
 ## Notes: Restores the current AchievementFrame selection for the active client session.
-## Interface: 120001
-## Version: 1.0.0
+## Version: 1.0.1
 
 SessionState.lua

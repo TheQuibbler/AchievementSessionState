@@ -43,16 +43,6 @@ local function GetCategoryID()
     return nil
 end
 
-local function GetAchievementID()
-    if AchievementFrameAchievements and AchievementFrameAchievements.GetSelectedAchievement then
-        local ok, id = pcall(AchievementFrameAchievements.GetSelectedAchievement, AchievementFrameAchievements)
-        if ok and id and id ~= 0 then
-            return id
-        end
-    end
-    return nil
-end
-
 
 -- ==========================================================================
 -- State capture / restore
@@ -61,18 +51,13 @@ end
 -- ==========================================================================
 local state = {
     categoryID = nil,
-    achievementID = nil,
 }
 
 local function CaptureState()
     state.categoryID = GetCategoryID()
-    state.achievementID = GetAchievementID()
 end
 
 local function RestoreSavedState()
-    if state.achievementID and AchievementFrame_SelectAchievement then
-        pcall(AchievementFrame_SelectAchievement, state.achievementID)
-    end
     if state.categoryID and AchievementFrame_UpdateAndSelectCategory then
         pcall(AchievementFrame_UpdateAndSelectCategory, state.categoryID)
     end
@@ -83,14 +68,6 @@ end
 -- Hook small handlers into the Blizzard UI to keep caches and saved state synchronized with user interaction.
 -- ==========================================================================
 
-local function OnAchievementShow()
-    RestoreSavedState()
-end
-
-local function OnAchievementHide()
-    CaptureState()
-end
-
 local hooksInstalled = false
 local function InstallHooks()
     if hooksInstalled or not AchievementFrame then
@@ -98,8 +75,8 @@ local function InstallHooks()
     end
     hooksInstalled = true
 
-    AchievementFrame:HookScript("OnShow", OnAchievementShow)
-    AchievementFrame:HookScript("OnHide", OnAchievementHide)
+    AchievementFrame:HookScript("OnShow", RestoreSavedState)
+    AchievementFrame:HookScript("OnHide", CaptureState)
 
     hooksecurefunc("AchievementFrameCategories_SelectElementData", CacheCategorySelection)
 end
